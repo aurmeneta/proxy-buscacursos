@@ -16,7 +16,13 @@ app.use((req, _res, next) => {
 app.use(cors())
 
 // Proxy
-app.use(createProxyMiddleware({ target: BUSCACURSOS_URL, changeOrigin: true }))
+app.use(createProxyMiddleware({
+  target: BUSCACURSOS_URL,
+  changeOrigin: true,
+  pathRewrite: {
+    '^/buscacursos': ''
+  }
+}))
 
 // Iniciar app
 app.listen(process.env.PORT || 3000, () => {
