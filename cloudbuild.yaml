@@ -15,6 +15,6 @@ steps:
   - '--image'
   - 'gcr.io/$PROJECT_ID/proxy-buscacursos:$COMMIT_SHA'
   - '--region'
-  - 'southamerica-west1'
+  - 'us-central1'
 images:
 - 'gcr.io/$PROJECT_ID/proxy-buscacursos:$COMMIT_SHA'
