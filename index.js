@@ -1,30 +1,25 @@
-const express = require('express')
 require('dotenv').config()
+
+const express = require('express')
 const { createProxyMiddleware } = require('http-proxy-middleware')
 const cors = require('cors')
 
-const app = express()
 const BUSCACURSOS_URL = 'https://buscacursos.uc.cl/'
 
-// Middleware para logging
+const app = express()
+
+app.use(cors())
+
 app.use((req, _res, next) => {
   console.log('Request: ' + req.originalUrl)
   next()
 })
 
-// CORS
-app.use(cors())
-
-// Proxy
 app.use(createProxyMiddleware({
   target: BUSCACURSOS_URL,
-  changeOrigin: true,
-  pathRewrite: {
-    '^/buscacursos': ''
-  }
+  changeOrigin: true
 }))
 
-// Iniciar app
 app.listen(process.env.PORT || 3000, () => {
-  console.log(`Escuchando en ${process.env.PORT || 3000}`)
+  console.log(`Proxy listening at ${process.env.PORT || 3000}`)
 })
